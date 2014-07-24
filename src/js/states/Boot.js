@@ -1,4 +1,4 @@
-/* globals pixelcontext, pixelwidth, pixelheight */
+
 BasicGame = {};
 
 BasicGame.Boot = function (game) {
@@ -17,10 +17,10 @@ BasicGame.Boot.prototype = {
     create: function () {
 
         var pixelCanvas = document.getElementById("pixel");
-        pixelcontext = pixelCanvas.getContext("2d");
-        pixelwidth = pixelCanvas.width;
-        pixelheight = pixelCanvas.height;
-        Phaser.Canvas.setSmoothingEnabled(pixelcontext, false);
+        this.game.CS.settings.pixelcontext = pixelCanvas.getContext("2d");
+        this.game.CS.settings.pixelwidth = pixelCanvas.width;
+        this.game.CS.settings.pixelheight = pixelCanvas.height;
+        Phaser.Canvas.setSmoothingEnabled(this.game.CS.settings.pixelcontext, false);
 
         this.game.input.maxPointers = 1;
         this.game.stage.disableVisibilityChange = true;
@@ -30,6 +30,16 @@ BasicGame.Boot.prototype = {
     },
 
     render: function() {
-        pixelcontext.drawImage(this.game.canvas, 0, 0, 32, 32, 0, 0, pixelwidth, pixelheight);
+        this.game.CS.settings.pixelcontext.drawImage(
+            this.game.canvas,
+            0,
+            0,
+            this.game.CS.settings.originWidth,
+            this.game.CS.settings.originHeight,
+            0,
+            0,
+            this.game.CS.settings.pixelwidth,
+            this.game.CS.settings.pixelheight
+        );
     }
 };

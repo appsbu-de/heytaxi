@@ -1,6 +1,7 @@
 /* globals pixelwidth, pixelheight */
 BasicGame.Game = function (game) {
     this.game = game;
+    console.log(this.game.CS);
 };
 
 BasicGame.Game.prototype = {
@@ -28,6 +29,16 @@ BasicGame.Game.prototype = {
 	},
 
     render: function() {
-        pixelcontext.drawImage(this.game.canvas, 0, 0, 32, 32, 0, 0, pixelwidth, pixelheight);
+        this.game.CS.settings.pixelcontext.drawImage(
+            this.game.canvas,
+            0,
+            0,
+            this.game.CS.settings.originWidth,
+            this.game.CS.settings.originHeight,
+            0,
+            0,
+            this.game.CS.settings.pixelwidth,
+            this.game.CS.settings.pixelheight
+        );
     }
 };
